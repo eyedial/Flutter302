@@ -35,12 +35,68 @@ class MyPage extends StatefulWidget {
 
 // _ 가 쓰인 변수나 클래스는 접근제어자가 privite 형태라고 생각하면 된다
 class _MyPageState extends State<MyPage> {
+  int counter = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
+      appBar: AppBar(
+        title: Text('Stateful Widget'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'You have pushjed\nthe butons this many times',
+              style: TextStyle(
+                fontSize: 18,
+              ),
+              textAlign: TextAlign.center,
+            ),
+            Text(
+              '$counter',
+              style: TextStyle(
+                fontSize: 50,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                FloatingActionButton(
+                  onPressed: (){
+                    /*counter++;
+                    print(counter);*/
+                    setState(() {
+                      counter++;
+                      print(counter);
+                    });
+                  },
+                  child: Icon(Icons.add),
+                  foregroundColor: Colors.amberAccent,
+                  backgroundColor: Colors.green,
+                ),
+                SizedBox(width: 30,),
+                FloatingActionButton(
+                  onPressed: (){
+                    setState(() {
+                      counter--;
+                      print(counter);
+                    });
+                  },
+                  child: Icon(Icons.remove),
+                  foregroundColor: Colors.amberAccent,
+                  backgroundColor: Colors.green,
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
-
-
