@@ -1,7 +1,6 @@
-import 'package:app6_listview_dialog/common/Common.dart';
-import 'package:app6_listview_dialog/model/JangterModel.dart';
-import 'package:app6_listview_dialog/screens/DetailPage.dart';
-import 'package:flutter/cupertino.dart';
+import '/common/Common.dart';
+import '/model/JangterModel.dart';
+import '/screens/DetailPage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -89,21 +88,33 @@ class _JangterPageState extends State<JangterPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Listview - 동네장터',
+          'Gridview - 동네장터',
           style: TextStyle(color: Colors.white),
         ),
         backgroundColor: Colors.amber,
       ),
-      // Listview와 Listview.builder가 있는데 차이점은 리스트뷰는
-      // 모든 항목을 가져와 실행시키므로 항목이 많으면 시간이 많이 걸린다
-      // 리스트뷰.빌더는 어느정도만 가져와서 먼저 보여주고 그 다음에 계속 가져온다
-      body: ListView.builder(
-        // 리스트뷰에 보여질 항목의 갯수
+
+      body: GridView.builder(
+        // 그리드뷰에 보여질 항목의 갯수
         itemCount: jangterModels.length,
+        // 만약 가로로 스크롤을 하게 하고 싶으면
+        //
+        // 그리드뷰에 대한 설정
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            // 가로로 몇개를 배치할 것인가
+            crossAxisCount: 2,
+            // 가로끼리 얼마나 공간을 띄울것인가
+            crossAxisSpacing: 10,
+            // 위아래는 얼마나 공간을 띄울것인가
+            mainAxisSpacing: 10,
+            // Gridview 의 Tile 높이를 얼마나
+            mainAxisExtent: 260,
+          ),
+
         itemBuilder: (context, index) {
           // 카드는 그림자 효과가 있으면서 떠 있는 느낌
           return Card(
-            child: Row(
+            child: Column(
               children: [
                 GestureDetector(
                   onTap: () {
@@ -137,15 +148,14 @@ class _JangterPageState extends State<JangterPage> {
                           builder: (context) => DetailPage(jangterModel: jangterModels[index])
                       ));
                     },
-                    child: Padding(
-                      padding: EdgeInsets.all(15),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
+                          SizedBox(height: 15,),
                           Text(
                             jangterModels[index].title,
                             style: TextStyle(
-                              fontSize: 18,
+                              fontSize: 13,
                               color: Colors.black,
                             ),
                             overflow: TextOverflow.ellipsis,
@@ -156,7 +166,7 @@ class _JangterPageState extends State<JangterPage> {
                           Text(
                             jangterModels[index].price,
                             style: TextStyle(
-                                fontSize: 15,
+                                fontSize: 13,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.black),
                             overflow: TextOverflow.ellipsis,
@@ -167,14 +177,14 @@ class _JangterPageState extends State<JangterPage> {
                           Text(
                             jangterModels[index].address,
                             style: TextStyle(
-                              fontSize: 15,
+                              fontSize: 13,
                               color: Colors.grey,
                             ),
                             overflow: TextOverflow.ellipsis,
                           ),
                         ],
                       ),
-                    ),
+
                   ),
                 )
               ],
