@@ -1,4 +1,10 @@
+import 'package:app8_drawer/screens/ScreenA.dart';
 import 'package:flutter/material.dart';
+
+import 'ScreenB.dart';
+import 'ScreenC.dart';
+import 'ScreenD.dart';
+import 'ScreenE.dart';
 
 class MyDrawer extends StatefulWidget {
   const MyDrawer({super.key});
@@ -8,6 +14,8 @@ class MyDrawer extends StatefulWidget {
 }
 
 class _MyDrawerState extends State<MyDrawer> {
+  Widget screenName = ScreenA();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -134,33 +142,36 @@ class _MyDrawerState extends State<MyDrawer> {
             ),
 
             // 헤더 아래 메뉴 : leading은 왼쪽레 아이콘, trailing: 오른쪽 아이콘
-            ListTile(
-              leading: Icon(Icons.home),
-              iconColor: Colors.blue,
-              focusColor: Colors.green,
-              textColor: Colors.black,
-              title: Text('홈'),
-              onTap: (){
-                print('홈 버튼이 눌렸습니다');
-              },
-              trailing: Icon(Icons.navigate_next),
-            ),
-            ListTile(
-              leading: Icon(Icons.shopping_cart),
-              iconColor: Colors.blue,
-              focusColor: Colors.green,
-              textColor: Colors.black,
-              title: Text('쇼핑'),
-              onTap: (){
-                print('쇼핑 버튼이 눌렸습니다');
-              },
-              trailing: Icon(Icons.navigate_next),
-            ),
+            buildListTile(context, Icons.home, '홈', ScreenA()),
+            buildListTile(context, Icons.shopping_cart_checkout, '쇼핑', ScreenB()),
+            buildListTile(context, Icons.mark_as_unread_sharp, '편지함', ScreenC()),
+            buildListTile(context, Icons.restore_from_trash, '휴지통', ScreenD()),
+            buildListTile(context, Icons.settings, '설정', ScreenE()),
 
 
           ],
         ),
       ),
+      body: screenName,
     );
+  }
+
+  ListTile buildListTile(BuildContext context, IconData iconData,
+      String title, Widget screenName) {
+    return ListTile(
+            leading: Icon(iconData),
+            iconColor: Colors.blue,
+            focusColor: Colors.green,
+            textColor: Colors.black,
+            title: Text(title),
+            onTap: (){
+              print('$title 메뉴가 눌렸습니다');
+              Navigator.pop(context);
+              setState(() {
+                this.screenName = screenName;
+              });
+            },
+            trailing: Icon(Icons.navigate_next),
+          );
   }
 }
