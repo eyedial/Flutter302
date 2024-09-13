@@ -33,12 +33,14 @@ dependencies:
 
   # 움직이는 동영상 : 스플레쉬 화면
   lottie: ^3.0.0
-  # 갤러리에 이미지 가져오기
+  # 갤러리나 카메라에서 이미지 가져오기
   image_picker: ^1.1.2
   # 갤러리에 이미지, 동영상 저장하기
   gallery_saver: ^2.3.2
   # import 'package:postgres/postgres.dart';
   postgres: ^3.3.0
+  like_button:
+
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.

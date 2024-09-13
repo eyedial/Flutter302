@@ -1,10 +1,11 @@
+import 'package:app13_splash_jangter/jangter/RegisteItem.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 import '../model/JangterModel.dart';
-import '../service/UserService.dart';
 import 'DetailPage.dart';
+import 'package:gallery_saver/gallery_saver.dart';
 
 
 class JangterPage extends StatefulWidget {
@@ -121,7 +122,12 @@ class _JangterPageState extends State<JangterPage> {
 
       floatingActionButton: FloatingActionButton(
         onPressed: (){
-
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => RegisteItem()
+            ),
+          );
         },
         foregroundColor: Colors.amberAccent,
         backgroundColor: Colors.green,
