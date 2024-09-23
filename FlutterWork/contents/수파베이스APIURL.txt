@@ -1,0 +1,22 @@
+// 수파베이스의 API 이용
+// Project URL : 수파베이스에 프로젝트를 생성하면 고유한 url이 생성
+final supabaseUrl = 'https://bmiwvlbcbvbqcrpplako.supabase.co';
+// Project Anon Key
+final supabaseKey =
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJtaXd2bGJjYnZicWNycHBsYWtvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTQ1MzMxNjEsImV4cCI6MjAzMDEwOTE2MX0.EBopUcFBKFT5JnrSQBCjTKfAIsBiGVdO6aL3bnbR74o';
+// 객체생성
+SupabaseClient supabase = SupabaseClient(supabaseUrl, supabaseKey);
+
+Future<Connection> postgresConn() async{
+  // postgres : 설정에 들어가서 configure 데이터베이스 가면 있다 : 수파베이스에 직접연결
+  // PostgreSQL : 데이터베이스에 직접 연결하는 객체 생성
+  final conn = await Connection.open(Endpoint(
+    host: 'aws-0-ap-northeast-2.pooler.supabase.com', // 데이터베이스 호스트
+    database: 'postgres', // 데이터베이스 이름
+    port: 5432,
+    username: 'postgres.bmiwvlbcbvbqcrpplako', // 데이터베이스 사용자 이름
+    password: '!css16440263', // 데이터베이스 비밀번호
+    ),
+  );
+  return conn;
+}
